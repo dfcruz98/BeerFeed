@@ -4,40 +4,27 @@ import retrofit2.Response
 
 
 data class ResponseMediator<T>(
-    val status: Status,
-    val data: Response<T>?,
-    val exception: Exception?
+    val result: StatusResult<T>,
 ) {
 
     companion object {
 
-        fun <T> result(data: Response<T>): ResponseMediator<T> {
+        fun <T> checkResponse(data: Response<T>): StatusResult<T> {
             if (!data.isSuccessful) {
-                return ResponseMediator(Status.Failure, null, null)
+                return StatusResult.Error(data.message())
             }
 
-            return success(data)
+            return StatusResult.Success(data.body())
         }
 
-        fun <T> success(data: Response<T>): ResponseMediator<T> {
-            return ResponseMediator(
-                status = Status.Success,
-                data = data,
-                exception = null
-            )
-        }
-
-        fun <T> failure(exception: Exception): ResponseMediator<T> {
-            return ResponseMediator(
-                status = Status.Failure,
-                data = null,
-                exception = exception
-            )
+        fun <T> failure(exception: Exception): StatusResult<T> {
+            return StatusResult.ExceptionResult(exception)
         }
     }
+}
 
-    sealed class Status {
-        object Success : Status()
-        object Failure : Status()
-    }
+sealed class StatusResult<T> {
+    data class Success<T>(val value: T?) : StatusResult<T>()
+    data class Error<T>(val message: String?) : StatusResult<T>()
+    data class ExceptionResult<T>(val ex: Exception) : StatusResult<T>()
 }
