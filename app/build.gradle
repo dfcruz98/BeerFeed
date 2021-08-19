@@ -66,8 +66,9 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.7'
 
     // Room
-    implementation "androidx.room:room-runtime:2.3.0"
-    annotationProcessor "androidx.room:room-compiler:2.3.0n"
+    implementation "androidx.room:room-ktx:2.3.0"
+    annotationProcessor "androidx.room:room-compiler:2.3.0"
+
 
     // Paging3
     implementation "androidx.paging:paging-runtime-ktx:3.0.1"
