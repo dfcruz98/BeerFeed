@@ -6,6 +6,8 @@ import com.example.beerfeed.data.database.BeersDatabase
 import com.example.beerfeed.data.network.BeersApiClient
 import com.example.beerfeed.data.network.BeersApiService
 import com.example.beerfeed.data.paging_mediator.PagingRemoteMediator
+import com.example.beerfeed.repostory.BeersRepository
+import com.example.beerfeed.repostory.BeersRepositoryImpl
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidApplication
@@ -48,6 +50,7 @@ val networkModule = module {
 @ExperimentalPagingApi
 val repositoryModule = module {
     factory { PagingRemoteMediator(get(), get()) }
+    factory<BeersRepository> { BeersRepositoryImpl(get(), get(), get()) }
 }
 
 val databaseModule = module {
