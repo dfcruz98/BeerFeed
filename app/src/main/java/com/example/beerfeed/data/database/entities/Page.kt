@@ -1,4 +1,4 @@
-package com.example.beerfeed.data.local.entities
+package com.example.beerfeed.data.database.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

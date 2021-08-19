@@ -1,4 +1,4 @@
-package com.example.beerfeed.data.local.dao
+package com.example.beerfeed.data.database.dao
 
 import androidx.paging.PagingSource
 import androidx.room.*

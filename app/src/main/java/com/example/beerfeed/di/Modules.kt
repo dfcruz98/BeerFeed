@@ -1,7 +1,7 @@
 package com.example.beerfeed.di
 
 import androidx.room.Room
-import com.example.beerfeed.data.local.BeersDatabase
+import com.example.beerfeed.data.database.BeersDatabase
 import com.example.beerfeed.data.network.BeersApiClient
 import com.example.beerfeed.data.network.BeersApiService
 import okhttp3.OkHttpClient
