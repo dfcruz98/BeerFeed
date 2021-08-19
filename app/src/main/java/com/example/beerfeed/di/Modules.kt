@@ -1,9 +1,11 @@
 package com.example.beerfeed.di
 
+import androidx.paging.ExperimentalPagingApi
 import androidx.room.Room
 import com.example.beerfeed.data.database.BeersDatabase
 import com.example.beerfeed.data.network.BeersApiClient
 import com.example.beerfeed.data.network.BeersApiService
+import com.example.beerfeed.data.paging_mediator.PagingRemoteMediator
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidApplication
@@ -41,6 +43,11 @@ val networkModule = module {
     factory { provideBeersApi(get()) }
     factory { BeersApiClient(get()) }
 
+}
+
+@ExperimentalPagingApi
+val repositoryModule = module {
+    factory { PagingRemoteMediator(get(), get()) }
 }
 
 val databaseModule = module {
