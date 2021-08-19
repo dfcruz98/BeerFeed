@@ -1,6 +1,7 @@
 package com.example.beerfeed
 
 import android.app.Application
+import com.example.beerfeed.di.databaseModule
 import com.example.beerfeed.di.networkModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -14,6 +15,7 @@ class MyApplication : Application() {
             androidLogger()
             androidContext(this@MyApplication)
             modules(
+                databaseModule,
                 networkModule
             )
         }
