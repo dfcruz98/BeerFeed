@@ -1,7 +1,10 @@
 package com.example.beerfeed.data.database.dao
 
 import androidx.paging.PagingSource
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.example.beerfeed.data.objects.Beer
 import kotlinx.coroutines.flow.Flow
 
@@ -22,8 +25,8 @@ interface BeersDao {
     @Query("SELECT * FROM beer WHERE favorite = 1")
     fun getFavorites(): Flow<List<Beer>>
 
-    @Update
-    fun update(beer: Beer)
+    @Query("UPDATE beer SET favorite = :favorite WHERE id = :id")
+    fun updateFavorite(id: Long, favorite: Boolean)
 
     @Query("DELETE FROM beer")
     suspend fun clearAll()
